@@ -1,0 +1,16 @@
+
+.blink_me {
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+  33% {
+    opacity: 70%;
+    color:green;
+  }
+  67% {
+    opacity: 70%;
+    color:blue;
+  }
+}
+
