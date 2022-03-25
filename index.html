@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jasleen Singh</title>
-
-    <link rel="shortcut icon" type="image/x-icon" href="images/1.jpg" />
-
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
-    <!--     <script data-ad-client="ca-pub-1899170730355305" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <title>Web Share Test</title>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      .error {
+        color: #d22;
+      }
+      input[type="button"] {
+        height: 30px;
+      }
+    </style>
   </head>
-  <body>
+  <body class="vsc-initialized">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href=""> Jasleen Singh </a>
+        <a class="navbar-brand" href=""> Jasleen Singh | Share </a>
       </div>
     </nav>
 
@@ -25,6 +25,7 @@
       }
 
       async function testWebShare() {
+        
         const title = "Title";
         const text = "A message!";
         const url = window.location.href;
@@ -32,22 +33,24 @@
         setShareButtonsEnabled(false);
         try {
           fetch("https://cdn.jasleensingh.co.in/1.jpg")
-            .then(function (response) {
-              return response.blob();
-            })
-            .then(function (blob) {
-              var file = new File([blob], "picture.jpg", { type: "image/jpeg" });
-              var filesArray = [file];
+          .then(function(response) {
+            return response.blob()
+          })
+          .then(function(blob) {
 
-              if (navigator.canShare && navigator.canShare({ files: filesArray })) {
-                navigator.share({
-                  text: "A message!\n",
-                  files: filesArray,
-                  title: "Title",
-                  url: window.location.href,
-                });
-              }
-            });
+            var file = new File([blob], "picture.jpg", {type: 'image/jpeg'});
+            var filesArray = [file];
+
+            if(navigator.canShare && navigator.canShare({ files: filesArray })) {
+              navigator.share({
+                text: 'some_text',
+                files: filesArray,
+                title: 'some_title',
+                url: 'some_url'
+              });
+            }
+            })
+
         } catch (error) {
           console.log("Error sharing: " + error);
         }
@@ -67,10 +70,14 @@
     </script>
 
     <div class="position-absolute text-center top-50 start-50 translate-middle">
-      <!--       <img src="images/1.jpg" alt="..." class="img-fluid" /> -->
-      <input id="share" type="button" value="Share" />
+<!--       <img src="images/1.jpg" alt="..." class="img-fluid" /> -->
+          <button id="share" value="Share" class="position-absolute bottom-0 end-0 btn btn-sm border border-white float-end rounded-2"><img src="https://cdn.jasleensingh.co.in/share.svg" class="card-cart-img" alt="..."></button>
 
-      <p class="blink_me display-1 text-center" style="color: red; opacity: 70%; font-family: 'Dancing Script', cursive">Hello Frands</p>
+
+      
     </div>
-  </body>
-</html>
+    
+  
+
+</body>
+  </html>
