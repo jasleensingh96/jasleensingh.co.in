@@ -18,6 +18,39 @@
         <a class="navbar-brand" href=""> Jasleen Singh </a>
       </div>
     </nav>
+    <input id="share" class="position-absolute start-50" type="button" value="Share" />
+
+    <script>
+      function setShareButtonsEnabled(enabled) {
+        document.querySelector("#share").disabled = !enabled;
+      }
+
+      async function testWebShare() {
+        
+        const title = "Title";
+        const text = "A message!";
+        const url = window.location.href;
+
+        setShareButtonsEnabled(false);
+        try {
+          await navigator.share({ title, text, url });
+        } catch (error) {
+          console.log("Error sharing: " + error);
+        }
+        setShareButtonsEnabled(true);
+      }
+
+      function onLoad() {
+        document.querySelector("#share").addEventListener("click", testWebShare);
+
+        if (navigator.share === undefined) {
+          setShareButtonsEnabled(false);
+          alert("Error: You need to use a browser that supports this draft " + "proposal.");
+        }
+      }
+
+      window.addEventListener("load", onLoad);
+    </script>
 
     <div class="position-absolute text-center top-50 start-50 translate-middle">
       <img src="images/1.jpg" alt="..." class="img-fluid" />
