@@ -19,64 +19,65 @@
       </div>
     </nav>
 
+
     <script>
-      function setShareButtonsEnabled(enabled) {
-        document.querySelector("#share").disabled = !enabled;
-      }
-
-      async function testWebShare() {
-        
-        const title = "Title";
-        const text = "A message!";
-        const url = window.location.href;
-
-        setShareButtonsEnabled(false);
-        try {
-          fetch("https://cdn.jasleensingh.co.in/1.jpg")
-          .then(function(response) {
-            return response.blob()
-          })
-          .then(function(blob) {
-
-            var file = new File([blob], "picture.jpg", {type: 'image/jpeg'});
-            var filesArray = [file];
-
-            if(navigator.canShare && navigator.canShare({ files: filesArray })) {
-              navigator.share({
-                text: 'some_text',
-                files: filesArray,
-                title: 'some_title',
-                url: 'some_url'
-              });
-            }
-            })
-
-        } catch (error) {
-          console.log("Error sharing: " + error);
+        function setShareButtonsEnabled(enabled) {
+          document.querySelector("#share").disabled = !enabled;
         }
-        setShareButtonsEnabled(true);
-      }
-
-      function onLoad() {
-        document.querySelector("#share").addEventListener("click", testWebShare);
-
-        if (navigator.share === undefined) {
-          setShareButtonsEnabled(false);
-          alert("Error: You need to use a browser that supports this draft " + "proposal.");
-        }
-      }
-
-      window.addEventListener("load", onLoad);
-    </script>
-
-    <div class="position-absolute text-center top-50 start-50 translate-middle">
-<!--       <img src="images/1.jpg" alt="..." class="img-fluid" /> -->
-          <button id="share" value="Share" class="position-absolute bottom-0 end-0 btn btn-sm border border-white float-end rounded-2"><img src="https://cdn.jasleensingh.co.in/share.svg" class="card-cart-img" alt="..."></button>
-
-
       
-    </div>
-    
+        async function testWebShare() {
+          
+          const title = "Title";
+          const text = "A message!";
+          const url = window.location.href;
+      
+          setShareButtonsEnabled(false);
+          try {
+            fetch("https://cdn.jasleensingh.co.in/1.webp")
+            .then(function(response) {
+              return response.blob()
+            })
+            .then(function(blob) {
+      
+              var file = new File([blob], "picture.webp", {type: 'image/webp'});
+              var filesArray = [file];
+      
+              if(navigator.canShare && navigator.canShare({ files: filesArray })) {
+                navigator.share({
+                  text: "A message!\n",
+                  files: filesArray,
+                  title: "Title",
+                  url: window.location.href,
+              });
+              }
+              })
+      
+          } catch (error) {
+            console.log("Error sharing: " + error);
+          }
+          setShareButtonsEnabled(true);
+        }
+      
+        function onLoad() {
+          document.querySelector("#share").addEventListener("click", testWebShare);
+      
+          if (navigator.share === undefined) {
+            setShareButtonsEnabled(false);
+            alert("Error: You need to use a browser that supports this draft " + "proposal.");
+          }
+        }
+      
+        window.addEventListener("load", onLoad);
+      </script>
+      
+      <div class="position-absolute text-center top-50 start-50 translate-middle">
+      <!--       <img src="images/1.jpg" alt="..." class="img-fluid" /> -->
+            <button id="share" value="Share" class="position-absolute bottom-0 end-0 btn btn-sm border border-white float-end rounded-2"><img src="https://cdn.jasleensingh.co.in/share.svg" class="card-cart-img" alt="..."></button>
+      
+      
+        
+      </div>
+   
   
 
 </body>
